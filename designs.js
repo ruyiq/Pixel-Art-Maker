@@ -1,13 +1,15 @@
 const table = document.getElementById("pixelCanvas");
 const cells = document.getElementsByClassName('cell');
 const sizePicker = document.getElementById('sizePicker');
+const height = document.getElementById('inputHeight');
+const width = document.getElementById('inputWidth');
 
 // config sizePicker
 sizePicker.addEventListener('submit',function(){
   event.preventDefault();
-  const height = document.getElementById('inputHeight').value;
-  const width = document.getElementById('inputWidth').value;
-  makeGrid(height, width);
+  let row_count = height.value;
+  let col_count = width.value;
+  makeGrid(row_count, col_count);
 });
 
 //reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr
@@ -25,11 +27,11 @@ function makeGrid(numrows, numcols) {
     table.innerHTML = table_body;
 
     // update color once a click is made
-    update_color();
+    addColorChangeListener();
 }
 
 // add click events to all cells
-function update_color() {
+function addColorChangeListener() {
   //loop over all cells and try to find the one being clicked.
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function (e) {
